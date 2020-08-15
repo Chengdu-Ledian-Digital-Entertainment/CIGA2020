@@ -2,15 +2,17 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using TMPro;
 
 public class PlayerShooting : MonoBehaviour
 {
-
+    
     public bool isHoldingTrigger;
     public Transform shotPoint;
     public Gun gun;
     public GameObject bullet;
-
+    [Header("子弹UI")]
+    public TextMeshProUGUI text;
     /// <summary>
     /// 子弹数量
     /// </summary>
@@ -41,13 +43,7 @@ public class PlayerShooting : MonoBehaviour
         {
             gun?.Shot(bulletClip, dir, shotPoint.position,ref bulletCount);
         }
+        text.text = bulletCount.ToString();
     }
-    /// <summary>
-    ///获取子弹
-    /// </summary>
-    /// <param name="count"></param>
-    void PickBullet(int count)
-    {
-        bulletCount += count;
-    }
+    
 }

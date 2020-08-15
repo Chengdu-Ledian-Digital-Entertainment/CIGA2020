@@ -13,20 +13,19 @@ public class Bullet : MonoBehaviour,IProduct
     private void Update()
     {
         transform.Translate(Vector3.right * template.flySpeed * Time.deltaTime, Space.Self);
-        if (Vector3.Distance(transform.position, PlayerController.player.transform.position) > 500)
+        if (Vector3.Distance(transform.position, PlayerController.player.transform.position) > 300)
             gameObject.SetActive(false);
     }
-    private void OnEnable()
-    {
-        //GetComponentInChildren<TrailRenderer>().enabled = true;
-    }
-    private void OnBecameInvisible()
-    {
-        gameObject.SetActive(false);
-    }
+    //private void OnEnable()
+    //{
+    //    //GetComponentInChildren<TrailRenderer>().enabled = true;
+    //}
+    //private void OnBecameInvisible()
+    //{
+    //    gameObject.SetActive(false);
+    //}
     private void OnDisable()
     {
-        //GetComponentInChildren<TrailRenderer>().enabled = false;
         Mother.Return(gameObject);
     }
 
