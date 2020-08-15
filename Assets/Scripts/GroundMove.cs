@@ -2,6 +2,10 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+/// <summary>
+/// 地面移动(UV版本)
+/// (暂时弃用)
+/// </summary>
 public class GroundMove : MonoBehaviour
 {
     [SerializeField]

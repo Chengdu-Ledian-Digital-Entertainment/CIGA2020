@@ -2,7 +2,9 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+/// <summary>
+/// 对象池
+/// </summary>
 public class Pool : MonoBehaviour
 {
     /// <summary>
