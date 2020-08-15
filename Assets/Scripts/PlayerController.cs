@@ -7,15 +7,15 @@ public class PlayerController : MonoBehaviour
     public float speed = 5f;
     public float speedMultiple = 1;
 
-    Vector3 mouseWorldPosition;
-
+    public static Vector3 mouseWorldPosition;
+    public static GameObject player;
     Vector2 move;
     [SerializeField]
     Rigidbody2D rb;
 
     private void Awake()
     {
-
+        player = gameObject;
     }
     void Start()
     {
