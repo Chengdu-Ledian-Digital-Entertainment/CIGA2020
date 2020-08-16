@@ -6,7 +6,7 @@ using TMPro;
 
 public class PlayerShooting : MonoBehaviour
 {
-    
+
     public bool isHoldingTrigger;
     public Transform shotPoint;
     public Gun gun;
@@ -34,16 +34,16 @@ public class PlayerShooting : MonoBehaviour
     private void Update()
     {
         d = Time.deltaTime;
-        dir = PlayerController.mouseWorldPosition - shotPoint.position;
+        dir = PlayerController.instance.mouseWorldPosition - shotPoint.position;
 
         gun?.Cooldown(d);
         isHoldingTrigger = Input.GetMouseButton(0);
 
         if (isHoldingTrigger)
         {
-            gun?.Shot(bulletClip, dir, shotPoint.position,ref bulletCount);
+            gun?.Shot(bulletClip, dir, shotPoint.position, ref bulletCount);
         }
         text.text = bulletCount.ToString();
     }
-    
+
 }

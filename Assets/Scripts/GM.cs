@@ -18,5 +18,7 @@ public class GM : MonoBehaviour
     private void Awake()
     {
         instance = this;
+
+
     }
 }

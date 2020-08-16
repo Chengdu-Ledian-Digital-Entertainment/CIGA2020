@@ -9,14 +9,15 @@ public class PlayerController : MonoBehaviour
 {
     public float speed = 5f;
     public float speedMultiple = 1;
-
-    public static Vector3 mouseWorldPosition;
+    public static PlayerController instance;
+    public  Vector3 mouseWorldPosition;
     public static GameObject player;
 
     /// <summary>
     /// 地面
     /// </summary>
     public Transform ground;
+    public Camera mainCamera;
 
     Vector2 move;
     [SerializeField]
@@ -25,19 +26,20 @@ public class PlayerController : MonoBehaviour
     PlayerShooting shoot;
     private void Awake()
     {
+        instance = this;
         player = gameObject;
     }
     void Start()
     {
-
     }
 
     void Update()
     {
         move.x = Input.GetAxisRaw("Horizontal");
         move.y = Input.GetAxisRaw("Vertical");
-        mouseWorldPosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+        mouseWorldPosition = mainCamera.ScreenToWorldPoint(Input.mousePosition);
         mouseWorldPosition.z = 0;
+        
         transform.up = mouseWorldPosition - transform.position;
 
         rb.velocity = move.normalized * speed * speedMultiple;

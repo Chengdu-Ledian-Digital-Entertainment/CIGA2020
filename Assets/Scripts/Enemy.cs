@@ -5,10 +5,10 @@ using UnityEngine;
 /// <summary>
 /// 蚂蚁类
 /// </summary>
-public class Enemy : MonoBehaviour
+public class Enemy : MonoBehaviour, IProduct
 {
-    [SerializeField]
-    int hp;
+
+    public int hp;
     /// <summary>
     /// 玩家引用
     /// </summary>
@@ -24,6 +24,9 @@ public class Enemy : MonoBehaviour
     /// </summary>
     [SerializeField]
     float speed;
+
+    public Pool Mother { get; set; }
+
     void Start()
     {
         player = PlayerController.player.transform;
@@ -35,6 +38,8 @@ public class Enemy : MonoBehaviour
         if (collision.CompareTag("Bullet"))
         {
             hp -= collision.GetComponent<Bullet>().template.damage;
+            collision.gameObject.SetActive(false);
+
             if (hp <= 0)
                 Death();
         }
@@ -44,9 +49,18 @@ public class Enemy : MonoBehaviour
     {
         MoveToPlayer();
     }
+    private void OnEnable()
+    {
+        hp = Random.Range(3, 6);
+    }
+
     private void OnDisable()
     {
+        if (Mother.gameObject.GetComponent<Spawner>().count > 0)
+            Mother.gameObject.GetComponent<Spawner>().count--;
 
+        print(GetHashCode() + "隐身!");
+        Mother.Return(gameObject);
     }
 
     void MoveToPlayer()
@@ -57,9 +71,7 @@ public class Enemy : MonoBehaviour
     }
     void Death()
     {
-        var i = Random.Range(0, GM.instance.rifts.Length);
-        Instantiate(GM.instance.rifts[i], transform.position, Quaternion.identity);
-
+        Instantiate(GM.instance.supply, transform.position, Quaternion.identity);
         gameObject.SetActive(false);
     }
 }

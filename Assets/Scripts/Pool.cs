@@ -18,7 +18,7 @@ public class Pool : MonoBehaviour
     /// <summary>
     /// 初始化及扩容大小
     /// </summary>
-    int baseAmount = 16;
+    int baseAmount = 4;
     /// <summary>
     /// 对象池队列
     /// </summary>
@@ -31,6 +31,8 @@ public class Pool : MonoBehaviour
     private void Awake()
     {
         pool = new Queue<GameObject>();
+        print(pool.Count);
+
     }
     /// <summary>
     /// 构建对象池后调用的初始化函数
@@ -53,12 +55,12 @@ public class Pool : MonoBehaviour
     /// </summary>
     void AddItem()
     {
-        for(int i = 0; i < baseAmount; i++)
+        for (int i = 0; i < baseAmount; i++)
         {
             var ob = Instantiate(item, transform);
             foo?.Invoke(ob);
             ob.GetComponent<IProduct>().Mother = mother;
-            ob.SetActive(false);
+            //ob.SetActive(false);//问题在这儿
             pool.Enqueue(ob);
         }
     }
@@ -68,7 +70,7 @@ public class Pool : MonoBehaviour
     /// <returns></returns>
     public GameObject Get()
     {
-        if (pool.Count <8)
+        if (pool.Count < baseAmount / 2)
         {
             AddItem();
         }
@@ -82,6 +84,7 @@ public class Pool : MonoBehaviour
     {
         ob.SetActive(false);
         pool.Enqueue(ob);
+
     }
 }
 /// <summary>

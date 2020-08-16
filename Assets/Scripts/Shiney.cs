@@ -27,7 +27,10 @@ public class Shiney : MonoBehaviour
     {
         if (collision.CompareTag("Bullet"))
         {
-
+            var i = Random.Range(0, GM.instance.rifts.Length);
+            Instantiate(GM.instance.rifts[i], transform.position, Quaternion.identity);
+            gameObject.SetActive(false);
+            collision.gameObject.SetActive(false);
         }
     }
     

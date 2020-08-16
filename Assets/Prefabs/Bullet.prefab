@@ -85,13 +85,13 @@ GameObject:
   - component: {fileID: 8817386337499476486}
   - component: {fileID: 7303185753300394541}
   - component: {fileID: 8689503035262319613}
-  m_Layer: 0
+  m_Layer: 1
   m_Name: Bullet
   m_TagString: Bullet
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &2782385587619814350
 Transform:
   m_ObjectHideFlags: 0

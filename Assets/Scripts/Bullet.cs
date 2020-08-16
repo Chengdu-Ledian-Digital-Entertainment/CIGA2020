@@ -16,14 +16,7 @@ public class Bullet : MonoBehaviour,IProduct
         if (Vector3.Distance(transform.position, PlayerController.player.transform.position) > 300)
             gameObject.SetActive(false);
     }
-    //private void OnEnable()
-    //{
-    //    //GetComponentInChildren<TrailRenderer>().enabled = true;
-    //}
-    //private void OnBecameInvisible()
-    //{
-    //    gameObject.SetActive(false);
-    //}
+    
     private void OnDisable()
     {
         Mother.Return(gameObject);
