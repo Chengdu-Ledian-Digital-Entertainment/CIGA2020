@@ -10,7 +10,7 @@ public class PlayerController : MonoBehaviour
     public float speed = 5f;
     public float speedMultiple = 1;
     public static PlayerController instance;
-    public  Vector3 mouseWorldPosition;
+    public Vector3 mouseWorldPosition;
     public static GameObject player;
 
     /// <summary>
@@ -39,10 +39,17 @@ public class PlayerController : MonoBehaviour
         move.y = Input.GetAxisRaw("Vertical");
         mouseWorldPosition = mainCamera.ScreenToWorldPoint(Input.mousePosition);
         mouseWorldPosition.z = 0;
-        
+
         transform.up = mouseWorldPosition - transform.position;
 
         rb.velocity = move.normalized * speed * speedMultiple;
+    }
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        if (collision.collider.CompareTag("Damage"))
+        {
+            Death();
+        }
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
@@ -67,13 +74,16 @@ public class PlayerController : MonoBehaviour
                         break;
                 }
                 break;
-                //拾取补给
+            //拾取补给
             case "Supply":
                 shoot.bulletCount += collision.GetComponent<Shiney>().bulletCount;
                 Destroy(collision.gameObject);
                 break;
         }
 
-
+    }
+    void Death()
+    {
+        print("死亡");
     }
 }

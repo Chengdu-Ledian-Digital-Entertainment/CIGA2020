@@ -36,21 +36,26 @@ public class Spawner : MonoBehaviour
 
         switch (Random.Range(0, 4))
         {
+            //左边
             case 0:
-                tempPosition.x = Random.Range(mainCamera.position.x - 20, mainCamera.position.x - 16);
+                tempPosition.x = Random.Range(mainCamera.position.x - 20, mainCamera.position.x - 8);
                 tempPosition.y = Random.Range(mainCamera.position.y - 10, mainCamera.position.y + 10);
                 break;
+
+            //右边
             case 1:
-                tempPosition.x = Random.Range(mainCamera.position.x + 16, mainCamera.position.x + 20);
+                tempPosition.x = Random.Range(mainCamera.position.x + 8, mainCamera.position.x + 20);
                 tempPosition.y = Random.Range(mainCamera.position.y - 10, mainCamera.position.y + 10);
                 break;
+            //上边
             case 2:
                 tempPosition.x = Random.Range(mainCamera.position.x - 16, mainCamera.position.x + 16);
-                tempPosition.y = Random.Range(mainCamera.position.y + 10, mainCamera.position.y + 15);
+                tempPosition.y = Random.Range(mainCamera.position.y + 5, mainCamera.position.y + 15);
                 break;
+            //下边
             case 3:
                 tempPosition.x = Random.Range(mainCamera.position.x - 16, mainCamera.position.x + 16);
-                tempPosition.y = Random.Range(mainCamera.position.y - 15, mainCamera.position.y - 10);
+                tempPosition.y = Random.Range(mainCamera.position.y - 15, mainCamera.position.y - 5);
                 break;
         }
         ob.transform.position = tempPosition;

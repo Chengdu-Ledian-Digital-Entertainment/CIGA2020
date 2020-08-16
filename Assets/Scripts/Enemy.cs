@@ -25,19 +25,31 @@ public class Enemy : MonoBehaviour, IProduct
     [SerializeField]
     float speed;
 
+    Animator animator;
+    public GameObject atkBox;
     public Pool Mother { get; set; }
+
+    private void Awake()
+    {
+        animator = GetComponent<Animator>();
+
+    }
 
     void Start()
     {
         player = PlayerController.player.transform;
-        speed = Random.Range(1, 3f);
+        speed = Random.Range(4.5f, 10f);
     }
 
-    private void OnTriggerEnter2D(Collider2D collision)
+    private void OnCollisionEnter2D(Collision2D collision)
     {
-        if (collision.CompareTag("Bullet"))
+        if (collision.gameObject.CompareTag("Player"))
         {
-            hp -= collision.GetComponent<Bullet>().template.damage;
+            animator.SetTrigger("Attack");
+        }
+        if (collision.collider.CompareTag("Bullet"))
+        {
+            hp -= collision.collider.GetComponent<Bullet>().template.damage;
             collision.gameObject.SetActive(false);
 
             if (hp <= 0)
@@ -45,9 +57,28 @@ public class Enemy : MonoBehaviour, IProduct
         }
     }
 
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        
+        if (collision.CompareTag("Player"))
+        {
+            animator.SetBool("Find", true);
+        }
+    }
+    private void OnTriggerExit2D(Collider2D collision)
+    {
+        if (collision.CompareTag("Player"))
+        {
+            animator.SetBool("Find", false);
+
+        }
+    }
+
     private void Update()
     {
-        MoveToPlayer();
+        //MoveToPlayer();
+        if (Vector3.Distance(transform.position, PlayerController.player.transform.position) > 40)
+            gameObject.SetActive(false);
     }
     private void OnEnable()
     {
@@ -59,6 +90,7 @@ public class Enemy : MonoBehaviour, IProduct
         if (Mother.gameObject.GetComponent<Spawner>().count > 0)
             Mother.gameObject.GetComponent<Spawner>().count--;
 
+        atkBox.SetActive(false);
         //print(GetHashCode() + "隐身!");
         Mother.Return(gameObject);
     }
