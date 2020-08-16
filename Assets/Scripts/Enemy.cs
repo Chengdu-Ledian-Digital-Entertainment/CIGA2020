@@ -59,11 +59,11 @@ public class Enemy : MonoBehaviour, IProduct
         if (Mother.gameObject.GetComponent<Spawner>().count > 0)
             Mother.gameObject.GetComponent<Spawner>().count--;
 
-        print(GetHashCode() + "隐身!");
+        //print(GetHashCode() + "隐身!");
         Mother.Return(gameObject);
     }
 
-    void MoveToPlayer()
+    public void MoveToPlayer()
     {
         dir = player.position - transform.position;
         transform.up = dir;
