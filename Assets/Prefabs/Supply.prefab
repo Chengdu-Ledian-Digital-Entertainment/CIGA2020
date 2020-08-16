@@ -84,6 +84,7 @@ GameObject:
   - component: {fileID: 5455451806065933191}
   - component: {fileID: 5455451806065933209}
   - component: {fileID: 2462258254361831179}
+  - component: {fileID: -5929059182704432133}
   m_Layer: 0
   m_Name: Supply
   m_TagString: Supply
@@ -170,7 +171,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   point: {fileID: 5455451804691384154}
-  bulletCount: 0
 --- !u!58 &2462258254361831179
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -187,3 +187,16 @@ CircleCollider2D:
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
   m_Radius: 0.5
+--- !u!114 &-5929059182704432133
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5455451806065933188}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 88776a06f7d5c9841a23a6cf97db0cbb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  bulletCount: 0

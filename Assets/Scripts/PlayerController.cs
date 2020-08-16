@@ -13,6 +13,7 @@ public class PlayerController : MonoBehaviour
     public Vector3 mouseWorldPosition;
     public static GameObject player;
 
+    public GameObject deathIcon;
     /// <summary>
     /// 地面
     /// </summary>
@@ -76,7 +77,7 @@ public class PlayerController : MonoBehaviour
                 break;
             //拾取补给
             case "Supply":
-                shoot.bulletCount += collision.GetComponent<Shiney>().bulletCount;
+                shoot.bulletCount += collision.GetComponent<Supply>().bulletCount;
                 Destroy(collision.gameObject);
                 break;
         }
@@ -85,5 +86,7 @@ public class PlayerController : MonoBehaviour
     void Death()
     {
         print("死亡");
+        deathIcon.SetActive(true);
+        gameObject.SetActive(false);
     }
 }

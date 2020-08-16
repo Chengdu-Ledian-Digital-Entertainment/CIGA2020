@@ -18,9 +18,12 @@ public class MouthFollow : MonoBehaviour
 
     void Update()
     {
-        transform.position = PlayerController.instance.mouseWorldPosition;
+        if (PlayerController.instance != null)
+        {
+            transform.position = PlayerController.instance.mouseWorldPosition;
 
-        lightRoad.pointLightOuterAngle = Mathf.Rad2Deg * Mathf.Atan((circleLight.pointLightOuterRadius + 1) / Vector3.Distance(transform.position, PlayerController.player.transform.position)) * 2;
-        lightRoad.pointLightOuterRadius = Vector3.Distance(transform.position, PlayerController.player.transform.position);
+            lightRoad.pointLightOuterAngle = Mathf.Rad2Deg * Mathf.Atan((circleLight.pointLightOuterRadius + 1) / Vector3.Distance(transform.position, PlayerController.player.transform.position)) * 2;
+            lightRoad.pointLightOuterRadius = Vector3.Distance(transform.position, PlayerController.player.transform.position);
+        }
     }
 }

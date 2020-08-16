@@ -38,7 +38,6 @@ public class Enemy : MonoBehaviour, IProduct
     void Start()
     {
         player = PlayerController.player.transform;
-        speed = Random.Range(4.5f, 10f);
     }
 
     private void OnCollisionEnter2D(Collision2D collision)
@@ -59,7 +58,7 @@ public class Enemy : MonoBehaviour, IProduct
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        
+
         if (collision.CompareTag("Player"))
         {
             animator.SetBool("Find", true);
@@ -82,7 +81,9 @@ public class Enemy : MonoBehaviour, IProduct
     }
     private void OnEnable()
     {
-        hp = Random.Range(3, 6);
+        hp = Random.Range(3, 7);
+        speed = Random.Range(2.5f,5);
+
     }
 
     private void OnDisable()
@@ -97,13 +98,18 @@ public class Enemy : MonoBehaviour, IProduct
 
     public void MoveToPlayer()
     {
+
         dir = player.position - transform.position;
         transform.up = dir;
+        speed = Random.Range(4,10f);
+
         transform.Translate(dir.normalized * Time.deltaTime * speed, Space.World);
+
     }
     void Death()
     {
         Instantiate(GM.instance.supply, transform.position, Quaternion.identity);
+        Spawner.AddCore();
         gameObject.SetActive(false);
     }
 }
