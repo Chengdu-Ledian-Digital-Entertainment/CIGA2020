@@ -19,7 +19,8 @@ public class PlayerController : MonoBehaviour
     /// </summary>
     public Transform ground;
     public Camera mainCamera;
-
+    public static Animator animator;
+    public AudioClip deathAudio;
     Vector2 move;
     [SerializeField]
     Rigidbody2D rb;
@@ -29,9 +30,11 @@ public class PlayerController : MonoBehaviour
     {
         instance = this;
         player = gameObject;
+        animator = GetComponent<Animator>();
     }
     void Start()
     {
+
     }
 
     void Update()
@@ -44,6 +47,8 @@ public class PlayerController : MonoBehaviour
         transform.up = mouseWorldPosition - transform.position;
 
         rb.velocity = move.normalized * speed * speedMultiple;
+
+        animator.SetFloat("Speed", rb.velocity.magnitude);
     }
     private void OnCollisionEnter2D(Collision2D collision)
     {
@@ -52,6 +57,7 @@ public class PlayerController : MonoBehaviour
             Death();
         }
     }
+
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
@@ -81,12 +87,19 @@ public class PlayerController : MonoBehaviour
                 Destroy(collision.gameObject);
                 break;
         }
-
     }
     void Death()
     {
         print("死亡");
+        animator.SetBool("Death", true);
+        GetComponent<AudioSource>().Stop();
+        GetComponent<AudioSource>().PlayOneShot(deathAudio);
         deathIcon.SetActive(true);
-        gameObject.SetActive(false);
+        rb.velocity = Vector2.zero;
+        rb.bodyType = RigidbodyType2D.Static;
+        mouseWorldPosition = transform.position;
+        gameObject.GetComponent<PlayerShooting>().enabled = false;
+        enabled = false;
+        //gameObject.SetActive(false);
     }
 }

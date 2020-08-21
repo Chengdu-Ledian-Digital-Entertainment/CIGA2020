@@ -90,7 +90,7 @@ public class Enemy : MonoBehaviour, IProduct
     {
         if (Mother.gameObject.GetComponent<Spawner>().count > 0)
             Mother.gameObject.GetComponent<Spawner>().count--;
-
+        Instantiate(GM.instance.enemyDeathAudio, transform.position, Quaternion.identity);
         atkBox.SetActive(false);
         //print(GetHashCode() + "隐身!");
         Mother.Return(gameObject);

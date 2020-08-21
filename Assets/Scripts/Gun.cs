@@ -14,6 +14,7 @@ public class Gun : ScriptableObject
             {
                 Fire(bulletClip, direction, startPosition,ref bulletCount);
                 shotTimer = shotInterval;
+                PlayerController.animator.SetTrigger("Fire");
             }
         }
     }

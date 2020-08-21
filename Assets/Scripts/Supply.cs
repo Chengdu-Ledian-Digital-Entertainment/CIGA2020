@@ -20,9 +20,10 @@ public class Supply : MonoBehaviour
         {
             var i = Random.Range(0, GM.instance.rifts.Length);
             Instantiate(GM.instance.rifts[i], transform.position, Quaternion.identity);
+            Instantiate(GM.instance.boxHit, transform.position, Quaternion.identity);
+
             gameObject.SetActive(false);
             collision.gameObject.SetActive(false);
         }
     }
-    
 }

@@ -8,7 +8,7 @@ using UnityEngine.Experimental.Rendering.Universal;
 public class Shiney : MonoBehaviour
 {
     public Light2D point;
-    
+    public float multiple = 1;
     /// <summary>
     /// 闪烁频率
     /// </summary>
@@ -16,12 +16,14 @@ public class Shiney : MonoBehaviour
     float t;
     private void Awake()
     {
-        shineyRate = Random.Range(2f, 10);
+        //shineyRate = Random.Range(2f, 10);
     }
     private void Update()
     {
-        t = Time.time % shineyRate;
-        t = t > shineyRate / 2 ? (shineyRate - t) / shineyRate / 2f : t / shineyRate / 2f;
-        point.intensity = t;
+        //t = Time.time % shineyRate;
+        //t = t > shineyRate / 2 ? (shineyRate - t) / shineyRate / 2f : t / shineyRate / 2f;
+        t = Mathf.Cos(Time.time);
+        
+        point.intensity = (t+1)*multiple;
     }
 }

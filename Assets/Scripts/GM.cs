@@ -15,6 +15,8 @@ public class GM : MonoBehaviour
     public GameObject[] jj;//家具
     public GameObject ant;//蚂蚁
     public GameObject supply;//补给箱
+    public GameObject enemyDeathAudio;
+    public GameObject boxHit;
     public LayerMask m;
     public int jjCount = 200;
 
